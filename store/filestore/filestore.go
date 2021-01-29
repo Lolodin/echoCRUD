@@ -19,7 +19,7 @@ type UserStore struct {
 
 func NewStore() UserStore {
 	us := UserStore{}
-	os.Mkdir(DIR, os.ModeDir)
+	os.Mkdir(DIR, os.ModePerm)
 	f, e := os.Create(PATHFILE)
 	defer f.Close()
 	if e != nil {
@@ -51,7 +51,7 @@ func (u UserStore) RemoveUser(id int) error {
 	if e != nil {
 		return e
 	}
-	return ioutil.WriteFile(PATHFILE, b, os.ModeAppend)
+	return ioutil.WriteFile(PATHFILE, b, os.ModePerm)
 
 }
 
@@ -62,7 +62,7 @@ func (u UserStore) AddUser(name string) error {
 	if e != nil {
 		return e
 	}
-	return ioutil.WriteFile(PATHFILE, b, os.ModeAppend)
+	return ioutil.WriteFile(PATHFILE, b, os.ModePerm)
 
 }
 
@@ -77,7 +77,7 @@ func (u UserStore) UpdateUser(user model.User) error {
 	if e != nil {
 		return e
 	}
-	return ioutil.WriteFile(PATHFILE, b, os.ModeAppend)
+	return ioutil.WriteFile(PATHFILE, b, os.ModePerm)
 
 }
 

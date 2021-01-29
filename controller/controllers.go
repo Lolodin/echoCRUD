@@ -7,9 +7,10 @@ import (
 	"net/http"
 	"strconv"
 )
+
 //get
 func GetUser(store repository.UserStore) func(c echo.Context) error {
-	return func(c echo.Context, ) error {
+	return func(c echo.Context) error {
 		id := c.Param("id")
 		idInt, e := strconv.Atoi(id)
 		if e != nil {
@@ -24,17 +25,19 @@ func GetUser(store repository.UserStore) func(c echo.Context) error {
 	}
 
 }
+
 //get
-func GetUsersList(store repository.UserStore) func (c echo.Context) error {
-	return func(c echo.Context, ) error {
+func GetUsersList(store repository.UserStore) func(c echo.Context) error {
+	return func(c echo.Context) error {
 		users := store.GetUsers()
 		return c.JSON(200, users)
 	}
 
 }
+
 //post
-func AddUser(store repository.UserStore) func (c echo.Context) error {
-	return func(c echo.Context, ) error {
+func AddUser(store repository.UserStore) func(c echo.Context) error {
+	return func(c echo.Context) error {
 		u := model.User{}
 		if err := c.Bind(&u); err != nil {
 			return err
@@ -47,9 +50,10 @@ func AddUser(store repository.UserStore) func (c echo.Context) error {
 	}
 
 }
+
 //put
-func UpdateUser(store repository.UserStore) func (c echo.Context) error {
-	return func(c echo.Context, ) error {
+func UpdateUser(store repository.UserStore) func(c echo.Context) error {
+	return func(c echo.Context) error {
 		u := model.User{}
 		if err := c.Bind(&u); err != nil {
 			return err
@@ -69,9 +73,10 @@ func UpdateUser(store repository.UserStore) func (c echo.Context) error {
 	}
 
 }
+
 //delete
-func RemoveUser(store repository.UserStore) func (c echo.Context) error {
-	return func(c echo.Context, ) error {
+func RemoveUser(store repository.UserStore) func(c echo.Context) error {
+	return func(c echo.Context) error {
 		id := c.Param("id")
 		idInt, e := strconv.Atoi(id)
 		if e != nil {

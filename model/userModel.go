@@ -3,7 +3,7 @@ package model
 import "fmt"
 
 type User struct {
-	ID int `json:"id"`
+	ID   int    `json:"id"`
 	Name string `json:"name"`
 }
 
@@ -32,7 +32,7 @@ func (u *Users) RemoveUser(id int) error {
 		return fmt.Errorf("user does not found")
 
 	}
-	if id==0 {
+	if id == 0 {
 		pivot++
 		u.List = u.List[pivot:]
 		return nil
@@ -53,9 +53,9 @@ func (u *Users) UpdateUser(user User) error {
 	}
 	return fmt.Errorf("user does not found")
 }
-func (u *Users)  AddUser(name string) {
+func (u *Users) AddUser(name string) {
 	id := len(u.List)
 	id++
-	user := User{ID: id, Name: name }
+	user := User{ID: id, Name: name}
 	u.List = append(u.List, user)
 }

@@ -9,20 +9,18 @@ import (
 )
 
 const (
-	 PATHFILE = "bd/BD.json"
-	 DIR = "bd"
+	PATHFILE = "bd/BD.json"
+	DIR      = "bd"
 )
-
 
 type UserStore struct {
 	os.File
-	
 }
 
-func NewStore() UserStore  {
-	us:= UserStore{}
+func NewStore() UserStore {
+	us := UserStore{}
 	os.Mkdir(DIR, os.ModeDir)
-	f,e:=os.Create(PATHFILE)
+	f, e := os.Create(PATHFILE)
 	defer f.Close()
 	if e != nil {
 		log.Fatal(e)
@@ -45,7 +43,7 @@ func (u UserStore) GetUsers() []model.User {
 
 func (u UserStore) RemoveUser(id int) error {
 	um := u.getModel()
-	e:=um.RemoveUser(id)
+	e := um.RemoveUser(id)
 	if e != nil {
 		return e
 	}
@@ -53,8 +51,7 @@ func (u UserStore) RemoveUser(id int) error {
 	if e != nil {
 		return e
 	}
-	return ioutil.WriteFile(PATHFILE,b, os.ModeAppend)
-
+	return ioutil.WriteFile(PATHFILE, b, os.ModeAppend)
 
 }
 
@@ -65,14 +62,13 @@ func (u UserStore) AddUser(name string) error {
 	if e != nil {
 		return e
 	}
-	return ioutil.WriteFile(PATHFILE,b, os.ModeAppend)
-
+	return ioutil.WriteFile(PATHFILE, b, os.ModeAppend)
 
 }
 
 func (u UserStore) UpdateUser(user model.User) error {
 	um := u.getModel()
-	e :=um.UpdateUser(user)
+	e := um.UpdateUser(user)
 	if e != nil {
 		return e
 	}
@@ -81,13 +77,13 @@ func (u UserStore) UpdateUser(user model.User) error {
 	if e != nil {
 		return e
 	}
-	return ioutil.WriteFile(PATHFILE,b, os.ModeAppend)
+	return ioutil.WriteFile(PATHFILE, b, os.ModeAppend)
 
 }
 
 func (u UserStore) getModel() *model.Users {
 	b, e := ioutil.ReadFile(PATHFILE)
-	if e!= nil {
+	if e != nil {
 		return nil
 	}
 	um := model.Users{}

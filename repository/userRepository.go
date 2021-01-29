@@ -8,5 +8,4 @@ type UserStore interface {
 	RemoveUser(id int) error
 	AddUser(name string) error
 	UpdateUser(user model.User) error
-
 }

@@ -1,7 +1,6 @@
 package controller
 
 import (
-
 	"echoServise/store/filestore"
 	"fmt"
 	"github.com/labstack/echo/v4"
@@ -15,7 +14,7 @@ func TestRouteGetUser(t *testing.T) {
 	e := echo.New()
 	s := filestore.NewStore()
 	req := httptest.NewRequest(http.MethodGet, "/", nil)
-	rec :=  httptest.NewRecorder()
+	rec := httptest.NewRecorder()
 	c := e.NewContext(req, rec)
 	c.SetPath("/users/:id")
 	c.SetParamNames("id")
@@ -30,7 +29,7 @@ func TestRouteGetUser(t *testing.T) {
 func TestAddUser(t *testing.T) {
 	e := echo.New()
 	s := filestore.NewStore()
-	req := httptest.NewRequest(http.MethodPost, "/",strings.NewReader(`{"name":"Test Controller"}`))
+	req := httptest.NewRequest(http.MethodPost, "/", strings.NewReader(`{"name":"Test Controller"}`))
 	req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
 	rec := httptest.NewRecorder()
 	c := e.NewContext(req, rec)
@@ -44,7 +43,7 @@ func TestGetUsersList(t *testing.T) {
 	e := echo.New()
 	s := filestore.NewStore()
 	req := httptest.NewRequest(http.MethodGet, "/", nil)
-	rec :=  httptest.NewRecorder()
+	rec := httptest.NewRecorder()
 	c := e.NewContext(req, rec)
 	err := GetUsersList(s)(c)
 	if err != nil {
@@ -56,7 +55,7 @@ func TestRemoveUser(t *testing.T) {
 	e := echo.New()
 	s := filestore.NewStore()
 	req := httptest.NewRequest(http.MethodDelete, "/", nil)
-	rec :=  httptest.NewRecorder()
+	rec := httptest.NewRecorder()
 	c := e.NewContext(req, rec)
 	c.SetPath("/users/:id")
 	c.SetParamNames("id")
@@ -72,7 +71,7 @@ func TestUpdateUser(t *testing.T) {
 	s := filestore.NewStore()
 	req := httptest.NewRequest(http.MethodPut, "/", strings.NewReader(`{"name":"Update Name"}`))
 	req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
-	rec :=  httptest.NewRecorder()
+	rec := httptest.NewRecorder()
 	c := e.NewContext(req, rec)
 	c.SetPath("/users/:id")
 	c.SetParamNames("id")
